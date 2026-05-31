@@ -6,7 +6,8 @@
 
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled">
+              HorizontalScrollBarVisibility="Disabled"
+              Style="{StaticResource SailockScrollViewer}">
 
             <StackPanel Margin="32,28,32,28">
 

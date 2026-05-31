@@ -105,21 +105,21 @@
                     <!-- Logout + versión -->
                     <StackPanel Grid.Row="2" Margin="20,0,20,20">
                         <Button Content="LOGOUT"
-                                Style="{StaticResource SailockButton}"
-                                Command="{Binding LogoutCommand}"
-                                Margin="0,0,0,10"/>
-                        <!-- En sidebar (MainWindow.xaml) -->
+            Style="{StaticResource SailockButton}"
+            Command="{Binding LogoutCommand}"
+            Margin="0,0,0,5"/>
                         <Button Content="v1.1.3"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Foreground="{DynamicResource AppForegroundSubtle}"
-                                FontSize="10"
-                                FontFamily="/Fonts/#Supermolot Light"
-                                HorizontalAlignment="Center"
-                                Cursor="Hand"
-                                Height="Auto"
-                                Padding="0"
-                                Command="{Binding ShowChangelogCommand}">
+            Background="Transparent"
+            BorderThickness="0"
+            Foreground="#555555"
+            FontSize="12"
+            FontFamily="/Fonts/#Supermolot Light"
+            HorizontalAlignment="Center"
+            Cursor="Arrow"
+            Height="Auto"
+            Padding="0"
+            Margin="0,5,0,0"
+            Command="{Binding ShowChangelogCommand}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>

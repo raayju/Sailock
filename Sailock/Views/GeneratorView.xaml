@@ -180,8 +180,7 @@
             <TextBox Grid.Column="1"
                      Text="{Binding ExcludeCharacters, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource ModalTextBoxWithPlaceholder}"
-                     Tag="Ex: * J 2 0 _ +"
-                     Height="38"/>
+                     Height="38" TextChanged="TextBox_TextChanged"/>
         </Grid>
 
         <!-- Start with -->

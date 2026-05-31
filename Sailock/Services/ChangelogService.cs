@@ -11,6 +11,7 @@ namespace Sailock.Services
             {
                 Version = "1.1.3",
                 Date    = "2026-05-30",
+                IsLatest = true,
                 Added   = new List<string>
                 {
                     "Auto-Lock de sesión funcional: cierre automático tras 5 minutos de inactividad",

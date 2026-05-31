@@ -1,7 +1,7 @@
-﻿using Sailock.Helpers;
+﻿using System.Collections.Generic;
+using Sailock.Helpers;
 using Sailock.Models;
 using Sailock.Services;
-using System.Collections.Generic;
 
 namespace Sailock.ViewModels
 {
@@ -10,12 +10,11 @@ namespace Sailock.ViewModels
         public string CurrentVersion { get; } = $"v{VersionService.Current}";
         public List<ChangelogEntry> Entries { get; } = ChangelogService.GetEntries();
         public System.Action OnClose { get; set; }
-
-        public Helpers.RelayCommand CloseCommand { get; }
+        public RelayCommand CloseCommand { get; }
 
         public ChangelogViewModel()
         {
-            CloseCommand = new Helpers.RelayCommand(_ => OnClose?.Invoke());
+            CloseCommand = new RelayCommand(_ => OnClose?.Invoke());
         }
     }
 }

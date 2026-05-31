@@ -8,5 +8,15 @@ namespace Sailock.Views
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ToggleButton_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

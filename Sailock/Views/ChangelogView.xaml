@@ -3,79 +3,139 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="{DynamicResource AppBackground}">
 
-    <Grid>
-        <Rectangle Fill="#000000" Opacity="0.75"/>
+    <Grid Margin="32,28,32,28">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <Border Background="{DynamicResource AppModalBackground}"
-                BorderBrush="{DynamicResource ContrastBorderBrush}"
-                BorderThickness="1"
-                Width="600"
-                MaxHeight="520"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Padding="36,30">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <!-- Cabecera -->
+        <Grid Grid.Row="0" Margin="0,0,0,28">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-                <!-- Header -->
-                <StackPanel Grid.Row="0" Margin="0,0,0,20">
-                    <TextBlock Text="HISTORIAL DE VERSIONES"
+            <StackPanel Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="CHANGELOG"
                                Foreground="{DynamicResource AppForeground}"
                                FontFamily="/Fonts/#Supermolot Light"
-                               FontSize="20"
-                               HorizontalAlignment="Center"
-                               Margin="0,0,0,4"/>
+                               FontSize="36"/>
                     <TextBlock Text="{Binding CurrentVersion}"
                                Foreground="{DynamicResource AppAccent}"
                                FontFamily="/Fonts/#Supermolot Light"
-                               FontSize="12"
-                               HorizontalAlignment="Center"/>
+                               FontSize="20"
+                               VerticalAlignment="Bottom"
+                               Margin="14,0,0,6"/>
                 </StackPanel>
+                <TextBlock Text="Stay updated with the latest features, improvements and bug fixes."
+                           Foreground="{DynamicResource AppForegroundDim}"
+                           FontFamily="/Fonts/#Supermolot Light"
+                           FontSize="11"
+                           Margin="0,6,0,0"/>
+            </StackPanel>
+        </Grid>
 
-                <!-- Lista de versiones -->
-                <ScrollViewer Grid.Row="1"
-                              VerticalScrollBarVisibility="Auto"
-                              HorizontalScrollBarVisibility="Disabled">
-                    <ItemsControl ItemsSource="{Binding Entries}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="0,0,0,24">
+        <!-- Lista de versiones -->
+        <ScrollViewer Grid.Row="1"
+              VerticalScrollBarVisibility="Auto"
+              HorizontalScrollBarVisibility="Disabled"
+              Style="{StaticResource SailockScrollViewer}">
+            <ItemsControl ItemsSource="{Binding Entries}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="{DynamicResource ContrastBorderBrush}"
+                                BorderThickness="{DynamicResource ContrastBorderThickness}"
+                                Margin="0,0,0,16"
+                                Padding="24,20">
+                            <StackPanel>
 
-                                    <!-- Versión + fecha -->
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                                        <TextBlock Text="v"
-                                                   Foreground="{DynamicResource AppAccent}"
-                                                   FontFamily="/Fonts/#Supermolot Light"
-                                                   FontSize="14"/>
-                                        <TextBlock Text="{Binding Version}"
-                                                   Foreground="{DynamicResource AppAccent}"
-                                                   FontFamily="/Fonts/#Supermolot Light"
-                                                   FontSize="14"
-                                                   Margin="0,0,12,0"/>
+                                <!-- Header de versión -->
+                                <Grid Margin="0,0,0,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Version "
+                                                       Foreground="{DynamicResource AppAccent}"
+                                                       FontFamily="/Fonts/#Supermolot Light"
+                                                       FontSize="18"/>
+                                            <TextBlock Text="{Binding Version}"
+                                                       Foreground="{DynamicResource AppAccent}"
+                                                       FontFamily="/Fonts/#Supermolot Light"
+                                                       FontSize="18"/>
+                                        </StackPanel>
                                         <TextBlock Text="{Binding Date}"
                                                    Foreground="{DynamicResource AppForegroundDim}"
                                                    FontFamily="/Fonts/#Supermolot Light"
                                                    FontSize="11"
-                                                   VerticalAlignment="Center"/>
+                                                   Margin="0,4,0,0"/>
                                     </StackPanel>
 
-                                    <!-- Añadido -->
-                                    <ItemsControl ItemsSource="{Binding Added}"
-                                                  Visibility="{Binding Added.Count,
-                                                               Converter={StaticResource NullToVisibilityConverter}}">
+                                    <!-- Badge Latest / Legacy -->
+                                    <Border Grid.Column="1"
+                                            VerticalAlignment="Top"
+                                            Padding="10,4"
+                                            CornerRadius="2">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Background"      Value="#1A1A1A"/>
+                                                <Setter Property="BorderBrush"     Value="#333333"/>
+                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsLatest}" Value="True">
+                                                        <Setter Property="Background"  Value="#1A2A1A"/>
+                                                        <Setter Property="BorderBrush" Value="{DynamicResource AppAccent}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock FontFamily="/Fonts/#Supermolot Light"
+                                                   FontSize="10">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Text"       Value="LEGACY"/>
+                                                    <Setter Property="Foreground" Value="#555555"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsLatest}" Value="True">
+                                                            <Setter Property="Text"       Value="LATEST"/>
+                                                            <Setter Property="Foreground" Value="{DynamicResource AppAccent}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Border>
+                                </Grid>
+
+                                <!-- NEW FEATURES -->
+                                <StackPanel Margin="0,0,0,12"
+                                            Visibility="{Binding Added, Converter={StaticResource CountToVisibilityConverter}}">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                        <TextBlock Text="★"
+                                                   Foreground="{DynamicResource AppAccent}"
+                                                   FontSize="13"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,8,0"/>
+                                        <TextBlock Text="NEW FEATURES"
+                                                   Foreground="{DynamicResource AppForeground}"
+                                                   FontFamily="/Fonts/#Supermolot Light"
+                                                   FontSize="12"
+                                                   VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <ItemsControl ItemsSource="{Binding Added}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
-                                                    <TextBlock Text="+"
-                                                               Foreground="#00FF41"
+                                                    <TextBlock Text="* "
+                                                               Foreground="{DynamicResource AppForegroundDim}"
                                                                FontFamily="/Fonts/#Supermolot Light"
-                                                               FontSize="11"
-                                                               Margin="0,0,8,0"
-                                                               Width="12"/>
+                                                               FontSize="11"/>
                                                     <TextBlock Text="{Binding}"
                                                                Foreground="{DynamicResource AppForegroundDim}"
                                                                FontFamily="/Fonts/#Supermolot Light"
@@ -85,49 +145,90 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-
-                                    <!-- Corregido -->
-                                    <ItemsControl ItemsSource="{Binding Fixed}"
-                                                  Visibility="{Binding Fixed.Count,
-                                                               Converter={StaticResource NullToVisibilityConverter}}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
-                                                    <TextBlock Text="✓"
-                                                               Foreground="#00ab26"
-                                                               FontFamily="/Fonts/#Supermolot Light"
-                                                               FontSize="11"
-                                                               Margin="0,0,8,0"
-                                                               Width="12"/>
-                                                    <TextBlock Text="{Binding}"
-                                                               Foreground="{DynamicResource AppForegroundDim}"
-                                                               FontFamily="/Fonts/#Supermolot Light"
-                                                               FontSize="11"
-                                                               TextWrapping="Wrap"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-
-                                    <!-- Separador entre versiones -->
-                                    <Rectangle Height="1"
-                                               Fill="{DynamicResource ContrastSeparatorBrush}"
-                                               Margin="0,16,0,0"/>
                                 </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
 
-                <!-- Botón cerrar -->
-                <Button Grid.Row="2"
-                        Content="CERRAR"
-                        Width="120"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource SailockButton}"
-                        Command="{Binding CloseCommand}"
-                        Margin="0,20,0,0"/>
-            </Grid>
-        </Border>
+                                <!-- IMPROVEMENTS -->
+                                <StackPanel Margin="0,0,0,12"
+                                            Visibility="{Binding Changed, Converter={StaticResource CountToVisibilityConverter}}">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                        <TextBlock Text="⚙"
+                                                   Foreground="#00ab26"
+                                                   FontSize="13"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,8,0"/>
+                                        <TextBlock Text="IMPROVEMENTS"
+                                                   Foreground="{DynamicResource AppForeground}"
+                                                   FontFamily="/Fonts/#Supermolot Light"
+                                                   FontSize="12"
+                                                   VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <ItemsControl ItemsSource="{Binding Changed}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                                                    <TextBlock Text="* "
+                                                               Foreground="{DynamicResource AppForegroundDim}"
+                                                               FontFamily="/Fonts/#Supermolot Light"
+                                                               FontSize="11"/>
+                                                    <TextBlock Text="{Binding}"
+                                                               Foreground="{DynamicResource AppForegroundDim}"
+                                                               FontFamily="/Fonts/#Supermolot Light"
+                                                               FontSize="11"
+                                                               TextWrapping="Wrap"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+
+                                <!-- BUG FIXES -->
+                                <StackPanel Visibility="{Binding Fixed, Converter={StaticResource CountToVisibilityConverter}}">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                        <TextBlock Text="✦"
+                                                   Foreground="#FF4D4D"
+                                                   FontSize="13"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,8,0"/>
+                                        <TextBlock Text="BUG FIXES"
+                                                   Foreground="{DynamicResource AppForeground}"
+                                                   FontFamily="/Fonts/#Supermolot Light"
+                                                   FontSize="12"
+                                                   VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <ItemsControl ItemsSource="{Binding Fixed}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                                                    <TextBlock Text="* "
+                                                               Foreground="{DynamicResource AppForegroundDim}"
+                                                               FontFamily="/Fonts/#Supermolot Light"
+                                                               FontSize="11"/>
+                                                    <TextBlock Text="{Binding}"
+                                                               Foreground="{DynamicResource AppForegroundDim}"
+                                                               FontFamily="/Fonts/#Supermolot Light"
+                                                               FontSize="11"
+                                                               TextWrapping="Wrap"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- Botón volver -->
+        <Button Grid.Row="2"
+                Content="← BACK"
+                Width="140"
+                HorizontalAlignment="Left"
+                Style="{StaticResource SailockButton}"
+                Command="{Binding CloseCommand}"
+                Margin="0,16,0,0"/>
+
     </Grid>
 </UserControl>

@@ -12,7 +12,8 @@
         <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
         <helpers:InverseBoolConverter x:Key="InverseBoolConverter"/>
-        <helpers:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>   
+        <helpers:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
+        <helpers:CountToVisibilityConverter x:Key="CountToVisibilityConverter"/>
         
         <!-- Recursos de contraste (modificados en tiempo de ejecución por ThemeService) -->
         <Thickness x:Key="ContrastBorderThickness">1</Thickness>
@@ -547,6 +548,85 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Thumb del ScrollBar (la pastilla que arrastras) -->
+        <Style x:Key="SailockScrollBarThumb" TargetType="Thumb">
+            <Setter Property="Background" Value="#1A1A1A"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border x:Name="thumb"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="2"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="thumb" Property="Background" Value="#00ab26"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="True">
+                                <Setter TargetName="thumb" Property="Background" Value="#00FF41"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ScrollBar vertical completo -->
+        <Style x:Key="SailockScrollBar" TargetType="ScrollBar">
+            <Setter Property="Width" Value="6"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="Transparent">
+                            <Border Background="#111111"
+                            CornerRadius="3"
+                            HorizontalAlignment="Center"
+                            Width="6"/>
+                            <Track x:Name="PART_Track"
+                           IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Opacity="0" IsTabStop="False"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource SailockScrollBarThumb}"
+                                   Width="6"/>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Opacity="0" IsTabStop="False"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ScrollViewer con el ScrollBar personalizado -->
+        <Style x:Key="SailockScrollViewer" TargetType="ScrollViewer">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollViewer">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollContentPresenter Grid.Column="0"/>
+                            <ScrollBar x:Name="PART_VerticalScrollBar"
+                               Grid.Column="1"
+                               Orientation="Vertical"
+                               Value="{TemplateBinding VerticalOffset}"
+                               Maximum="{TemplateBinding ScrollableHeight}"
+                               ViewportSize="{TemplateBinding ViewportHeight}"
+                               Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                               Style="{StaticResource SailockScrollBar}"
+                               Margin="4,0,0,0"/>
+                        </Grid>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
