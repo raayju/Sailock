@@ -18,7 +18,7 @@
 
         <!-- Título -->
         <TextBlock Grid.Row="0"
-                   Text="GENERATOR"
+                   Text="{DynamicResource Generator_Title}"
                    Foreground="White"
                    FontFamily="/Fonts/#Supermolot Light"
                    FontSize="36"
@@ -32,20 +32,19 @@
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0"
-        Background="#0D0D0D"
-        BorderBrush="#1A1A1A"
-        BorderThickness="1"
-        Height="38"
-        Margin="0,0,12,0">
+                    Background="#0D0D0D"
+                    BorderBrush="#1A1A1A"
+                    BorderThickness="1"
+                    Height="38"
+                    Margin="0,0,12,0">
                 <Grid>
-                    <!-- Placeholder -->
-                    <TextBlock Text="YOUR NEW PASSWORD..."
-                   Foreground="#2A2A2A"
-                   FontFamily="/Fonts/#Supermolot Light"
-                   FontSize="13"
-                   VerticalAlignment="Center"
-                   Padding="14,0"
-                   IsHitTestVisible="False">
+                    <TextBlock Text="{DynamicResource Generator_Placeholder}"
+                               Foreground="#2A2A2A"
+                               FontFamily="/Fonts/#Supermolot Light"
+                               FontSize="13"
+                               VerticalAlignment="Center"
+                               Padding="14,0"
+                               IsHitTestVisible="False">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -60,38 +59,35 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-
-                    <!-- Contraseña generada -->
                     <TextBlock Text="{Binding GeneratedPassword}"
-                   Foreground="#00FF41"
-                   FontFamily="/Fonts/#Supermolot Light"
-                   FontSize="14"
-                   VerticalAlignment="Center"
-                   Padding="14,0"/>
+                               Foreground="#00FF41"
+                               FontFamily="/Fonts/#Supermolot Light"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               Padding="14,0"/>
                 </Grid>
             </Border>
 
             <Button Grid.Column="1"
-                    Content="COPY"
+                    Content="{DynamicResource Generator_Copy}"
                     Width="100"
                     Style="{StaticResource SailockButton}"
                     Command="{Binding CopyCommand}"/>
         </Grid>
 
-        <!-- Slider de longitud -->
+        <!-- Slider longitud -->
         <StackPanel Grid.Row="2" Margin="0,0,0,20">
             <TextBlock Foreground="White"
                        FontFamily="/Fonts/#Supermolot Light"
                        FontSize="12"
                        Margin="0,0,0,8">
-                <Run Text="LENGTH  -  "/>
+                <Run Text="{DynamicResource Generator_LengthPrefix}"/>
                 <Run Text="{Binding Length}"/>
-                <Run Text="  CHARACTERS"/>
+                <Run Text="{DynamicResource Generator_LengthSuffix}"/>
             </TextBlock>
 
             <Slider x:Name="LengthSlider"
-                    Minimum="4"
-                    Maximum="64"
+                    Minimum="4" Maximum="64"
                     Value="{Binding Length, Mode=TwoWay}"
                     TickFrequency="1"
                     IsSnapToTickEnabled="True"
@@ -108,23 +104,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <CheckBox Grid.Column="0"
-                      Content="UPPERCASE"
-                      IsChecked="{Binding UseUppercase}"
-                      Style="{StaticResource SailockCheckBox}"/>
-            <CheckBox Grid.Column="1"
-                      Content="LOWERCASE"
-                      IsChecked="{Binding UseLowercase}"
-                      Style="{StaticResource SailockCheckBox}"/>
-            <CheckBox Grid.Column="2"
-                      Content="NUMBERS"
-                      IsChecked="{Binding UseNumbers}"
-                      Style="{StaticResource SailockCheckBox}"/>
-            <CheckBox Grid.Column="3"
-                      Content="SYMBOLS"
-                      IsChecked="{Binding UseSymbols}"
-                      Style="{StaticResource SailockCheckBox}"/>
+            <CheckBox Grid.Column="0" Content="{DynamicResource Generator_Uppercase}"
+                      IsChecked="{Binding UseUppercase}" Style="{StaticResource SailockCheckBox}"/>
+            <CheckBox Grid.Column="1" Content="{DynamicResource Generator_Lowercase}"
+                      IsChecked="{Binding UseLowercase}" Style="{StaticResource SailockCheckBox}"/>
+            <CheckBox Grid.Column="2" Content="{DynamicResource Generator_Numbers}"
+                      IsChecked="{Binding UseNumbers}"   Style="{StaticResource SailockCheckBox}"/>
+            <CheckBox Grid.Column="3" Content="{DynamicResource Generator_Symbols}"
+                      IsChecked="{Binding UseSymbols}"   Style="{StaticResource SailockCheckBox}"/>
         </Grid>
 
         <!-- Toggles -->
@@ -136,28 +123,23 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
             <TextBlock Grid.Column="0"
-                       Text="REPEAT CHARACTERS"
+                       Text="{DynamicResource Generator_RepeatChars}"
                        Foreground="White"
                        FontFamily="/Fonts/#Supermolot Light"
                        FontSize="12"
                        VerticalAlignment="Center"
                        Margin="0,0,16,0"/>
-
             <ToggleButton Grid.Column="1"
                           IsChecked="{Binding AllowRepeat}"
-                          Style="{StaticResource SailockToggle}"
-                          Margin="0,0,0,0"/>
-
+                          Style="{StaticResource SailockToggle}"/>
             <TextBlock Grid.Column="3"
-                       Text="SEQUENTIAL CHARACTERS"
+                       Text="{DynamicResource Generator_SequentialChars}"
                        Foreground="White"
                        FontFamily="/Fonts/#Supermolot Light"
                        FontSize="12"
                        VerticalAlignment="Center"
                        Margin="0,0,16,0"/>
-
             <ToggleButton Grid.Column="4"
                           IsChecked="{Binding AllowSequential}"
                           Style="{StaticResource SailockToggle}"/>
@@ -169,14 +151,12 @@
                 <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
             <TextBlock Grid.Column="0"
-                       Text="EXCLUDE CHARACTERS"
+                       Text="{DynamicResource Generator_ExcludeChars}"
                        Foreground="White"
                        FontFamily="/Fonts/#Supermolot Light"
                        FontSize="12"
                        VerticalAlignment="Center"/>
-
             <TextBox Grid.Column="1"
                      Text="{Binding ExcludeCharacters, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource ModalTextBoxWithPlaceholder}"
@@ -189,31 +169,25 @@
                 <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
             <TextBlock Grid.Column="0"
-                       Text="START WITH ..."
+                       Text="{DynamicResource Generator_StartWith}"
                        Foreground="White"
                        FontFamily="/Fonts/#Supermolot Light"
                        FontSize="12"
                        VerticalAlignment="Center"/>
-
             <TextBox Grid.Column="1"
                      Text="{Binding StartWith, UpdateSourceTrigger=PropertyChanged}"
                      Style="{StaticResource ModalTextBoxWithPlaceholder}"
-                     Width="60"
-                     Height="38"
-                     MaxLength="1"
-                     HorizontalContentAlignment="Center"/>
+                     Width="160" Height="38"/>
         </Grid>
 
         <!-- Botón Generate -->
         <Button Grid.Row="8"
-                Content="GENERATE"
+                Content="{DynamicResource Generator_Generate}"
                 Width="160"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Left"
                 Style="{StaticResource SailockButton}"
                 Command="{Binding GenerateCommand}"
-                Margin="0,24,0,0"/>
-
+                Margin="0,20,0,0"/>
     </Grid>
 </UserControl>

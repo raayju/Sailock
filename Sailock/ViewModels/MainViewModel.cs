@@ -74,6 +74,7 @@ namespace Sailock.ViewModels
             ThemeService.ApplyTheme(_appData.Settings.IsDarkTheme);
             ThemeService.ApplyContrast(_appData.Settings.IsHighContrast);
             ThemeService.ApplyTextSize(_appData.Settings.TextSize);
+            LocalizationService.ApplyLanguage(_appData.Settings.Language);
 
             LogoSource = _appData.Settings.IsDarkTheme
                 ? "pack://application:,,,/Resources/sailock_logo.png"

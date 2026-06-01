@@ -13,14 +13,14 @@
                 Padding="36,30">
             <StackPanel>
 
-                <TextBlock Text="ACTIVAR 2FA"
+                <TextBlock Text="{DynamicResource Totp_Title}"
                            Foreground="White"
                            FontFamily="/Fonts/#Supermolot Light"
                            FontSize="22"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,8"/>
 
-                <TextBlock Text="Escanea este QR con Google Authenticator, Authy o cualquier app TOTP compatible."
+                <TextBlock Text="{DynamicResource Totp_ScanDesc}"
                            Foreground="#666666"
                            FontFamily="/Fonts/#Supermolot Light"
                            FontSize="11"
@@ -28,15 +28,12 @@
                            TextWrapping="Wrap"
                            Margin="0,0,0,20"/>
 
-                <!-- QR Code -->
                 <Image Source="{Binding QrImage}"
-                       Width="180"
-                       Height="180"
+                       Width="180" Height="180"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,16"/>
 
-                <!-- Clave manual -->
-                <TextBlock Text="O introduce manualmente esta clave:"
+                <TextBlock Text="{DynamicResource Totp_ManualKey}"
                            Foreground="#444444"
                            FontFamily="/Fonts/#Supermolot Light"
                            FontSize="10"
@@ -50,8 +47,7 @@
                            HorizontalAlignment="Center"
                            Margin="0,0,0,20"/>
 
-                <!-- Campo verificación -->
-                <TextBlock Text="Introduce el código de 6 dígitos para confirmar:"
+                <TextBlock Text="{DynamicResource Totp_CodeLabel}"
                            Foreground="#666666"
                            FontFamily="/Fonts/#Supermolot Light"
                            FontSize="11"
@@ -71,16 +67,15 @@
                            FontSize="11"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,16"
-                           Visibility="{Binding ErrorMessage,
-                                        Converter={StaticResource NullToVisibilityConverter}}"/>
+                           Visibility="{Binding ErrorMessage, Converter={StaticResource NullToVisibilityConverter}}"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="VERIFICAR"
+                    <Button Content="{DynamicResource Totp_Verify}"
                             Width="130"
                             Style="{StaticResource SailockButton}"
                             Command="{Binding VerifyCommand}"
                             Margin="0,0,16,0"/>
-                    <Button Content="CANCELAR"
+                    <Button Content="{DynamicResource Totp_Cancel}"
                             Width="130"
                             Style="{StaticResource SailockButton}"
                             Command="{Binding CancelCommand}"/>

@@ -6,13 +6,10 @@
 
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto"
-              HorizontalScrollBarVisibility="Disabled"
-              Style="{StaticResource SailockScrollViewer}">
-
+                      HorizontalScrollBarVisibility="Disabled">
             <StackPanel Margin="32,28,32,28">
 
-                <!-- Título -->
-                <TextBlock Text="SETTINGS"
+                <TextBlock Text="{DynamicResource Settings_Title}"
                            Foreground="White"
                            FontFamily="/Fonts/#Supermolot Light"
                            FontSize="36"
@@ -24,7 +21,7 @@
                         Margin="0,0,0,20">
                     <StackPanel>
 
-                        <TextBlock Text="SECURITY"
+                        <TextBlock Text="{DynamicResource Settings_Security}"
                                    Foreground="#444444"
                                    FontFamily="/Fonts/#Supermolot Light"
                                    FontSize="11"
@@ -32,35 +29,34 @@
 
                         <Rectangle Height="1" Fill="{DynamicResource ContrastSeparatorBrush}"/>
 
-                        <!-- Enable 2FA -->
+                        <!-- 2FA -->
                         <Grid Margin="16,16,16,16">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="ENABLE 2FA PASSWORD"
+                                <TextBlock Text="{DynamicResource Settings_2FA_Title}"
                                            Foreground="White"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="13"/>
-                                <TextBlock Text="Add an extra layer of security by enabling 2FA"
+                                <TextBlock Text="{DynamicResource Settings_2FA_Desc}"
                                            Foreground="#444444"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="10"
                                            Margin="0,3,0,0"/>
                             </StackPanel>
-                            <Button Grid.Column="1"
-                                    Width="110"
+                            <Button Grid.Column="1" Width="110"
                                     Style="{StaticResource SailockButton}"
                                     Command="{Binding Enable2FACommand}">
                                 <Button.Content>
                                     <TextBlock FontFamily="/Fonts/#Supermolot Light" FontSize="12">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
-                                                <Setter Property="Text" Value="ENABLE"/>
+                                                <Setter Property="Text" Value="{DynamicResource Settings_2FA_Enable}"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Is2FAEnabled}" Value="True">
-                                                        <Setter Property="Text" Value="DISABLE"/>
+                                                        <Setter Property="Text" Value="{DynamicResource Settings_2FA_Disable}"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -79,18 +75,18 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="CHANGE MASTER PASSWORD"
+                                <TextBlock Text="{DynamicResource Settings_MasterPass_Title}"
                                            Foreground="White"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="13"/>
-                                <TextBlock Text="Change the master password"
+                                <TextBlock Text="{DynamicResource Settings_MasterPass_Desc}"
                                            Foreground="#444444"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="10"
                                            Margin="0,3,0,0"/>
                             </StackPanel>
                             <Button Grid.Column="1"
-                                    Content="CHANGE"
+                                    Content="{DynamicResource Settings_MasterPass_Button}"
                                     Width="110"
                                     Style="{StaticResource SailockButton}"
                                     Command="{Binding ChangeMasterPassCommand}"/>
@@ -105,28 +101,27 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="AUTO-LOCK SESSION"
+                                <TextBlock Text="{DynamicResource Settings_AutoLock_Title}"
                                            Foreground="White"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="13"/>
-                                <TextBlock Text="Automatically log out after 5 minutes of inactivity"
+                                <TextBlock Text="{DynamicResource Settings_AutoLock_Desc}"
                                            Foreground="#444444"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="10"
                                            Margin="0,3,0,0"/>
                             </StackPanel>
-                            <Button Grid.Column="1"
-                                    Width="110"
+                            <Button Grid.Column="1" Width="110"
                                     Style="{StaticResource SailockButton}"
                                     Command="{Binding ToggleAutoLockCommand}">
                                 <Button.Content>
                                     <TextBlock FontFamily="/Fonts/#Supermolot Light" FontSize="12">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
-                                                <Setter Property="Text" Value="ENABLE"/>
+                                                <Setter Property="Text" Value="{DynamicResource Settings_2FA_Enable}"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding AutoLockEnabled}" Value="True">
-                                                        <Setter Property="Text" Value="DISABLE"/>
+                                                        <Setter Property="Text" Value="{DynamicResource Settings_2FA_Disable}"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -145,7 +140,7 @@
                         Margin="0,0,0,20">
                     <StackPanel>
 
-                        <TextBlock Text="ACCESSIBILITY"
+                        <TextBlock Text="{DynamicResource Settings_Accessibility}"
                                    Foreground="#444444"
                                    FontFamily="/Fonts/#Supermolot Light"
                                    FontSize="11"
@@ -160,24 +155,22 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="THEME"
+                                <TextBlock Text="{DynamicResource Settings_Theme_Title}"
                                            Foreground="White"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="13"/>
-                                <TextBlock Text="Switch the app theme between light and dark mode"
+                                <TextBlock Text="{DynamicResource Settings_Theme_Desc}"
                                            Foreground="#444444"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="10"
                                            Margin="0,3,0,0"/>
                             </StackPanel>
-                            <StackPanel Grid.Column="1"
-                                        Orientation="Horizontal"
-                                        VerticalAlignment="Center">
-                                <CheckBox Content="LIGHT"
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <CheckBox Content="{DynamicResource Settings_Theme_Light}"
                                           IsChecked="{Binding IsDarkTheme, Converter={StaticResource InverseBoolConverter}}"
                                           Style="{StaticResource SailockCheckBox}"
                                           Margin="0,0,16,0"/>
-                                <CheckBox Content="DARK"
+                                <CheckBox Content="{DynamicResource Settings_Theme_Dark}"
                                           IsChecked="{Binding IsDarkTheme}"
                                           Style="{StaticResource SailockCheckBox}"/>
                             </StackPanel>
@@ -192,24 +185,22 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="CONTRAST"
+                                <TextBlock Text="{DynamicResource Settings_Contrast_Title}"
                                            Foreground="White"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="13"/>
-                                <TextBlock Text="Improve the visibility of text and buttons"
+                                <TextBlock Text="{DynamicResource Settings_Contrast_Desc}"
                                            Foreground="#444444"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="10"
                                            Margin="0,3,0,0"/>
                             </StackPanel>
-                            <StackPanel Grid.Column="1"
-                                        Orientation="Horizontal"
-                                        VerticalAlignment="Center">
-                                <CheckBox Content="ON"
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <CheckBox Content="{DynamicResource Settings_Contrast_On}"
                                           IsChecked="{Binding IsHighContrast}"
                                           Style="{StaticResource SailockCheckBox}"
                                           Margin="0,0,16,0"/>
-                                <CheckBox Content="OFF"
+                                <CheckBox Content="{DynamicResource Settings_Contrast_Off}"
                                           IsChecked="{Binding IsHighContrast, Converter={StaticResource InverseBoolConverter}}"
                                           Style="{StaticResource SailockCheckBox}"/>
                             </StackPanel>
@@ -224,11 +215,11 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="TEXT SIZE"
+                                <TextBlock Text="{DynamicResource Settings_TextSize_Title}"
                                            Foreground="White"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="13"/>
-                                <TextBlock Text="Increase or decrease the font size"
+                                <TextBlock Text="{DynamicResource Settings_TextSize_Desc}"
                                            Foreground="#444444"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="10"
@@ -250,11 +241,11 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="LANGUAGE"
+                                <TextBlock Text="{DynamicResource Settings_Language_Title}"
                                            Foreground="White"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="13"/>
-                                <TextBlock Text="Choose your preferred language"
+                                <TextBlock Text="{DynamicResource Settings_Language_Desc}"
                                            Foreground="#444444"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="10"
@@ -266,8 +257,6 @@
                                       Style="{StaticResource SailockComboBox}">
                                 <ComboBoxItem Content="English"/>
                                 <ComboBoxItem Content="Español"/>
-                                <ComboBoxItem Content="Français"/>
-                                <ComboBoxItem Content="Deutsch"/>
                             </ComboBox>
                         </Grid>
 
@@ -280,7 +269,7 @@
                         Margin="0,0,0,20">
                     <StackPanel>
 
-                        <TextBlock Text="DATA MANAGEMENT"
+                        <TextBlock Text="{DynamicResource Settings_DataManagement}"
                                    Foreground="#444444"
                                    FontFamily="/Fonts/#Supermolot Light"
                                    FontSize="11"
@@ -288,15 +277,13 @@
 
                         <Rectangle Height="1" Fill="{DynamicResource ContrastSeparatorBrush}"/>
 
-                        <!-- Status message -->
                         <TextBlock Text="{Binding StatusMessage}"
                                    Foreground="#00FF41"
                                    FontFamily="/Fonts/#Supermolot Light"
                                    FontSize="11"
                                    Margin="16,12,16,0"
                                    TextWrapping="Wrap"
-                                   Visibility="{Binding StatusMessage,
-                                                Converter={StaticResource NullToVisibilityConverter}}"/>
+                                   Visibility="{Binding StatusMessage, Converter={StaticResource NullToVisibilityConverter}}"/>
 
                         <!-- Import -->
                         <Grid Margin="16,16,16,16">
@@ -305,18 +292,18 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="IMPORT"
+                                <TextBlock Text="{DynamicResource Settings_Import_Title}"
                                            Foreground="White"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="13"/>
-                                <TextBlock Text="Import a .slock file"
+                                <TextBlock Text="{DynamicResource Settings_Import_Desc}"
                                            Foreground="#444444"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="10"
                                            Margin="0,3,0,0"/>
                             </StackPanel>
                             <Button Grid.Column="1"
-                                    Content="IMPORT"
+                                    Content="{DynamicResource Settings_Import_Button}"
                                     Width="110"
                                     Style="{StaticResource SailockButton}"
                                     Command="{Binding ImportCommand}"/>
@@ -331,18 +318,18 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="EXPORT"
+                                <TextBlock Text="{DynamicResource Settings_Export_Title}"
                                            Foreground="White"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="13"/>
-                                <TextBlock Text="Export your data as a backup or import it on a new device"
+                                <TextBlock Text="{DynamicResource Settings_Export_Desc}"
                                            Foreground="#444444"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="10"
                                            Margin="0,3,0,0"/>
                             </StackPanel>
                             <Button Grid.Column="1"
-                                    Content="EXPORT"
+                                    Content="{DynamicResource Settings_Export_Button}"
                                     Width="110"
                                     Style="{StaticResource SailockButton}"
                                     Command="{Binding ExportCommand}"/>
@@ -352,12 +339,10 @@
                 </Border>
 
                 <!-- DANGER ZONE -->
-                <Border BorderBrush="#2A0000"
-                        BorderThickness="1"
-                        Margin="0,0,0,20">
+                <Border BorderBrush="#2A0000" BorderThickness="1" Margin="0,0,0,20">
                     <StackPanel>
 
-                        <TextBlock Text="DANGER ZONE"
+                        <TextBlock Text="{DynamicResource Settings_DangerZone}"
                                    Foreground="#663333"
                                    FontFamily="/Fonts/#Supermolot Light"
                                    FontSize="11"
@@ -365,25 +350,25 @@
 
                         <Rectangle Height="1" Fill="#2A0000"/>
 
-                        <!-- Delete All Data -->
+                        <!-- Delete All -->
                         <Grid Margin="16,16,16,16">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="DELETE ALL DATA"
+                                <TextBlock Text="{DynamicResource Settings_DeleteAll_Title}"
                                            Foreground="#FF4D4D"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="13"/>
-                                <TextBlock Text="Delete all stored data. This action cannot be undone."
+                                <TextBlock Text="{DynamicResource Settings_DeleteAll_Desc}"
                                            Foreground="#663333"
                                            FontFamily="/Fonts/#Supermolot Light"
                                            FontSize="10"
                                            Margin="0,3,0,0"/>
                             </StackPanel>
                             <Button Grid.Column="1"
-                                    Content="DELETE"
+                                    Content="{DynamicResource Settings_DeleteAll_Button}"
                                     Width="110"
                                     Style="{StaticResource SailockButton_Danger}"
                                     Command="{Binding OpenDeleteModalCommand}"/>
@@ -396,30 +381,24 @@
         </ScrollViewer>
 
         <!-- Modal Delete All -->
-        <Grid Visibility="{Binding IsDeleteModalOpen,
-                           Converter={StaticResource BoolToVisibilityConverter}}">
+        <Grid Visibility="{Binding IsDeleteModalOpen, Converter={StaticResource BoolToVisibilityConverter}}">
             <Rectangle Fill="#000000" Opacity="0.75"/>
-            <Border Background="#111111"
-                    BorderBrush="#FF4D4D"
-                    BorderThickness="1"
-                    Width="460"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Padding="36,30">
+            <Border Background="#111111" BorderBrush="#FF4D4D" BorderThickness="1"
+                    Width="460" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="36,30">
                 <StackPanel>
-                    <TextBlock Text="DELETE ALL DATA"
+                    <TextBlock Text="{DynamicResource Modal_DeleteAll_Title}"
                                Foreground="White"
                                FontFamily="/Fonts/#Supermolot Light"
                                FontSize="22"
                                HorizontalAlignment="Center"
                                Margin="0,0,0,12"/>
-                    <TextBlock Text="THIS ACTION CANNOT BE UNDONE"
+                    <TextBlock Text="{DynamicResource Modal_DeleteAll_Warning}"
                                Foreground="#FF4D4D"
                                FontFamily="/Fonts/#Supermolot Light"
                                FontSize="12"
                                HorizontalAlignment="Center"
                                Margin="0,0,0,20"/>
-                    <TextBlock Text="¿Are you sure you want to delete all your data?"
+                    <TextBlock Text="{DynamicResource Modal_DeleteAll_Confirm}"
                                Foreground="#888888"
                                FontFamily="/Fonts/#Supermolot Light"
                                FontSize="12"
@@ -427,69 +406,62 @@
                                TextAlignment="Center"
                                Margin="0,0,0,28"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="DELETE"
+                        <Button Content="{DynamicResource Modal_Delete}"
                                 Width="120"
                                 Style="{StaticResource SailockButton_Danger}"
                                 Command="{Binding ConfirmDeleteCommand}"
                                 Margin="0,0,16,0"/>
-                        <Button Content="CANCEL"
+                        <Button Content="{DynamicResource Modal_Cancel}"
                                 Width="120"
                                 Style="{StaticResource SailockButton}"
                                 Command="{Binding CancelDeleteCommand}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
-            
-            
         </Grid>
 
-        <!-- Modal confirmación desactivar 2FA -->
-        <Grid Visibility="{Binding IsDisable2FAModalOpen,
-                   Converter={StaticResource BoolToVisibilityConverter}}">
+        <!-- Modal Disable 2FA -->
+        <Grid Visibility="{Binding IsDisable2FAModalOpen, Converter={StaticResource BoolToVisibilityConverter}}">
             <Rectangle Fill="#000000" Opacity="0.75"/>
-            <Border Background="#111111"
-            BorderBrush="#00ab26"
-            BorderThickness="1"
-            Width="420"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Padding="36,30">
+            <Border Background="#111111" BorderBrush="#00ab26" BorderThickness="1"
+                    Width="420" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="36,30">
                 <StackPanel>
-                    <TextBlock Text="DESACTIVAR 2FA"
-                       Foreground="White"
-                       FontFamily="/Fonts/#Supermolot Light"
-                       FontSize="22"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,12"/>
-                    <TextBlock Text="Al desactivar el 2FA tu cuenta será menos segura."
-                       Foreground="#888888"
-                       FontFamily="/Fonts/#Supermolot Light"
-                       FontSize="12"
-                       HorizontalAlignment="Center"
-                       TextAlignment="Center"
-                       TextWrapping="Wrap"
-                       Margin="0,0,0,20"/>
-                    <TextBlock Text="NOTA: Los codigos actuales dejarán de funcionar."
-                       Foreground="#FF4D4D"
-                       FontFamily="/Fonts/#Supermolot Light"
-                       FontSize="12"
-                       HorizontalAlignment="Center"
-                       TextAlignment="Center"
-                       TextWrapping="Wrap"
-                       Margin="0,0,0,28"/>
+                    <TextBlock Text="{DynamicResource Modal_Disable2FA_Title}"
+                               Foreground="White"
+                               FontFamily="/Fonts/#Supermolot Light"
+                               FontSize="22"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,12"/>
+                    <TextBlock Text="{DynamicResource Modal_Disable2FA_Desc}"
+                               Foreground="#888888"
+                               FontFamily="/Fonts/#Supermolot Light"
+                               FontSize="12"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,20"/>
+                    <TextBlock Text="{DynamicResource Modal_Disable2FA_Warning}"
+                               Foreground="#FF4D4D"
+                               FontFamily="/Fonts/#Supermolot Light"
+                               FontSize="12"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,28"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="DESACTIVAR"
-                        Width="130"
-                        Style="{StaticResource SailockButton_Danger}"
-                        Command="{Binding ConfirmDisable2FACommand}"
-                        Margin="0,0,16,0"/>
-                        <Button Content="CANCELAR"
-                        Width="130"
-                        Style="{StaticResource SailockButton}"
-                        Command="{Binding CancelDisable2FACommand}"/>
+                        <Button Content="{DynamicResource Modal_Disable2FA_Button}"
+                                Width="130"
+                                Style="{StaticResource SailockButton_Danger}"
+                                Command="{Binding ConfirmDisable2FACommand}"
+                                Margin="0,0,16,0"/>
+                        <Button Content="{DynamicResource Modal_Cancel}"
+                                Width="130"
+                                Style="{StaticResource SailockButton}"
+                                Command="{Binding CancelDisable2FACommand}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
         </Grid>
+
     </Grid>
 </UserControl>

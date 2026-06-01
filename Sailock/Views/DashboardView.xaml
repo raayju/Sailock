@@ -15,7 +15,7 @@
 
             <!-- Título -->
             <TextBlock Grid.Row="0"
-                       Text="DASHBOARD"
+                       Text="{DynamicResource Dashboard_Title}"
                        Foreground="White"
                        FontFamily="/Fonts/#Supermolot Light"
                        FontSize="36"
@@ -61,13 +61,13 @@
                 </TextBox>
 
                 <Button Grid.Column="1"
-                        Content="ADD NEW"
+                        Content="{DynamicResource Dashboard_AddNew}"
                         Width="120"
                         Style="{StaticResource SailockButton}"
                         Command="{Binding OpenAddModalCommand}"/>
             </Grid>
 
-            <!-- Cabecera -->
+            <!-- Cabecera columnas -->
             <Grid Grid.Row="2" Margin="0,0,0,6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="160"/>
@@ -75,10 +75,14 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="TITLE"   Foreground="#444444" FontFamily="/Fonts/#Supermolot Light" FontSize="11" Margin="4,0,0,0"/>
-                <TextBlock Grid.Column="1" Text="DATA"    Foreground="#444444" FontFamily="/Fonts/#Supermolot Light" FontSize="11"/>
-                <TextBlock Grid.Column="2" Text="VALUE"   Foreground="#444444" FontFamily="/Fonts/#Supermolot Light" FontSize="11"/>
-                <TextBlock Grid.Column="3" Text="OPTIONS" Foreground="#444444" FontFamily="/Fonts/#Supermolot Light" FontSize="11" HorizontalAlignment="Right"/>
+                <TextBlock Grid.Column="0" Text="{DynamicResource Dashboard_ColTitle}"
+                           Foreground="#444444" FontFamily="/Fonts/#Supermolot Light" FontSize="11" Margin="4,0,0,0"/>
+                <TextBlock Grid.Column="1" Text="{DynamicResource Dashboard_ColData}"
+                           Foreground="#444444" FontFamily="/Fonts/#Supermolot Light" FontSize="11"/>
+                <TextBlock Grid.Column="2" Text="{DynamicResource Dashboard_ColValue}"
+                           Foreground="#444444" FontFamily="/Fonts/#Supermolot Light" FontSize="11"/>
+                <TextBlock Grid.Column="3" Text="{DynamicResource Dashboard_ColOptions}"
+                           Foreground="#444444" FontFamily="/Fonts/#Supermolot Light" FontSize="11" HorizontalAlignment="Right"/>
             </Grid>
 
             <Rectangle Grid.Row="2" Height="1" Fill="#1A1A1A" VerticalAlignment="Bottom" Margin="0,0,0,-1"/>
@@ -103,24 +107,36 @@
                                            FontSize="13" VerticalAlignment="Center" Margin="4,0,0,0"/>
 
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="Email:"    Foreground="#555555" FontFamily="/Fonts/#Supermolot Light" FontSize="11" Visibility="{Binding Email,    Converter={StaticResource NullToVisibilityConverter}}"/>
-                                    <TextBlock Text="Username:" Foreground="#555555" FontFamily="/Fonts/#Supermolot Light" FontSize="11" Visibility="{Binding Username, Converter={StaticResource NullToVisibilityConverter}}"/>
-                                    <TextBlock Text="Password:" Foreground="#555555" FontFamily="/Fonts/#Supermolot Light" FontSize="11"/>
+                                    <TextBlock Text="{DynamicResource Dashboard_FieldEmail}"
+                                               Foreground="#555555" FontFamily="/Fonts/#Supermolot Light" FontSize="11"
+                                               Visibility="{Binding Email, Converter={StaticResource NullToVisibilityConverter}}"/>
+                                    <TextBlock Text="{DynamicResource Dashboard_FieldUsername}"
+                                               Foreground="#555555" FontFamily="/Fonts/#Supermolot Light" FontSize="11"
+                                               Visibility="{Binding Username, Converter={StaticResource NullToVisibilityConverter}}"/>
+                                    <TextBlock Text="{DynamicResource Dashboard_FieldPassword}"
+                                               Foreground="#555555" FontFamily="/Fonts/#Supermolot Light" FontSize="11"/>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Email}"    Foreground="#00FF41" FontFamily="/Fonts/#Supermolot Light" FontSize="11" Visibility="{Binding Email,    Converter={StaticResource NullToVisibilityConverter}}"/>
-                                    <TextBlock Text="{Binding Username}" Foreground="#00FF41" FontFamily="/Fonts/#Supermolot Light" FontSize="11" Visibility="{Binding Username, Converter={StaticResource NullToVisibilityConverter}}"/>
+                                    <TextBlock Text="{Binding Email}"
+                                               Foreground="#00FF41" FontFamily="/Fonts/#Supermolot Light" FontSize="11"
+                                               Visibility="{Binding Email, Converter={StaticResource NullToVisibilityConverter}}"/>
+                                    <TextBlock Text="{Binding Username}"
+                                               Foreground="#00FF41" FontFamily="/Fonts/#Supermolot Light" FontSize="11"
+                                               Visibility="{Binding Username, Converter={StaticResource NullToVisibilityConverter}}"/>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="••••••••••" Foreground="#00FF41" FontSize="11" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                        <Button Content="[copy]" Foreground="#00ab26" Background="Transparent" BorderThickness="0"
+                                        <TextBlock Text="••••••••••" Foreground="#00FF41" FontSize="11"
+                                                   VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                        <Button Content="{DynamicResource Dashboard_CopyPassword}"
+                                                Foreground="#00ab26" Background="Transparent" BorderThickness="0"
                                                 FontFamily="/Fonts/#Supermolot Light" FontSize="11" Cursor="Hand"
                                                 Command="{Binding DataContext.CopyPasswordCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                 CommandParameter="{Binding}"/>
                                     </StackPanel>
                                 </StackPanel>
 
-                                <Button Grid.Column="3" Content="[ EDIT ]"
+                                <Button Grid.Column="3"
+                                        Content="{DynamicResource Dashboard_Edit}"
                                         Foreground="#00FF41" Background="Transparent" BorderThickness="0"
                                         FontFamily="/Fonts/#Supermolot Light" FontSize="12" Cursor="Hand"
                                         HorizontalAlignment="Right" VerticalAlignment="Center"
@@ -141,26 +157,27 @@
             <Border Background="#111111" BorderBrush="#00ab26" BorderThickness="1"
                     Width="460" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="36,30">
                 <StackPanel>
-                    <TextBlock Text="ADD NEW" Foreground="White" FontFamily="/Fonts/#Supermolot Light"
+                    <TextBlock Text="{DynamicResource Modal_AddNew_Title}"
+                               Foreground="White" FontFamily="/Fonts/#Supermolot Light"
                                FontSize="22" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-                    <TextBlock Text="TITLE" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldTitle}" Style="{StaticResource ModalLabel}"/>
                     <TextBox Text="{Binding EditingEntry.Title, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource ModalTextBox}" Margin="0,4,0,12"/>
 
-                    <TextBlock Text="CATEGORY" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldCategory}" Style="{StaticResource ModalLabel}"/>
                     <TextBox Text="{Binding EditingEntry.Category, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource ModalTextBox}" Margin="0,4,0,12"/>
 
-                    <TextBlock Text="EMAIL" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldEmail}" Style="{StaticResource ModalLabel}"/>
                     <TextBox Text="{Binding EditingEntry.Email, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource ModalTextBox}" Margin="0,4,0,12"/>
 
-                    <TextBlock Text="USERNAME" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldUsername}" Style="{StaticResource ModalLabel}"/>
                     <TextBox Text="{Binding EditingEntry.Username, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource ModalTextBox}" Margin="0,4,0,12"/>
 
-                    <TextBlock Text="PASSWORD" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldPassword}" Style="{StaticResource ModalLabel}"/>
                     <Grid Margin="0,4,0,12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -236,20 +253,19 @@
                                 Command="{Binding TogglePasswordVisibilityCommand}"/>
                     </Grid>
 
-                    <TextBlock Text="NOTE" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldNote}" Style="{StaticResource ModalLabel}"/>
                     <TextBox Text="{Binding EditingEntry.Note, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource ModalTextBox}" Height="80"
                              TextWrapping="Wrap" AcceptsReturn="True"
                              VerticalContentAlignment="Top" Margin="0,4,0,24"/>
 
-                    <!-- Add New: solo SAVE y CANCEL -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="SAVE"
+                        <Button Content="{DynamicResource Modal_Save}"
                                 Width="120"
                                 Style="{StaticResource SailockButton}"
                                 Command="{Binding SaveNewEntryCommand}"
                                 Margin="0,0,16,0"/>
-                        <Button Content="CANCEL"
+                        <Button Content="{DynamicResource Modal_Cancel}"
                                 Width="120"
                                 Style="{StaticResource SailockButton}"
                                 Command="{Binding CancelAddCommand}"/>
@@ -264,26 +280,27 @@
             <Border Background="#111111" BorderBrush="#00ab26" BorderThickness="1"
                     Width="460" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="36,30">
                 <StackPanel>
-                    <TextBlock Text="EDIT" Foreground="White" FontFamily="/Fonts/#Supermolot Light"
+                    <TextBlock Text="{DynamicResource Modal_Edit_Title}"
+                               Foreground="White" FontFamily="/Fonts/#Supermolot Light"
                                FontSize="22" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-                    <TextBlock Text="TITLE" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldTitle}" Style="{StaticResource ModalLabel}"/>
                     <TextBox Text="{Binding EditingEntry.Title, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource ModalTextBox}" Margin="0,4,0,12"/>
 
-                    <TextBlock Text="CATEGORY" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldCategory}" Style="{StaticResource ModalLabel}"/>
                     <TextBox Text="{Binding EditingEntry.Category, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource ModalTextBox}" Margin="0,4,0,12"/>
 
-                    <TextBlock Text="EMAIL" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldEmail}" Style="{StaticResource ModalLabel}"/>
                     <TextBox Text="{Binding EditingEntry.Email, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource ModalTextBox}" Margin="0,4,0,12"/>
 
-                    <TextBlock Text="USERNAME" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldUsername}" Style="{StaticResource ModalLabel}"/>
                     <TextBox Text="{Binding EditingEntry.Username, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource ModalTextBox}" Margin="0,4,0,12"/>
 
-                    <TextBlock Text="PASSWORD" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldPassword}" Style="{StaticResource ModalLabel}"/>
                     <Grid Margin="0,4,0,12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -359,27 +376,25 @@
                                 Command="{Binding TogglePasswordVisibilityCommand}"/>
                     </Grid>
 
-                    <TextBlock Text="NOTE" Style="{StaticResource ModalLabel}"/>
+                    <TextBlock Text="{DynamicResource Modal_FieldNote}" Style="{StaticResource ModalLabel}"/>
                     <TextBox Text="{Binding EditingEntry.Note, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource ModalTextBox}" Height="80"
                              TextWrapping="Wrap" AcceptsReturn="True"
                              VerticalContentAlignment="Top" Margin="0,4,0,24"/>
 
-                    <!-- Edit: SAVE solo si hay cambios, DELETE y CANCEL siempre -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="SAVE"
+                        <Button Content="{DynamicResource Modal_SaveChanges}"
                                 Width="110"
                                 Style="{StaticResource SailockButton}"
                                 Command="{Binding SaveEditCommand}"
                                 Margin="0,0,12,0"
-                                Visibility="{Binding HasEditChanges,
-                                             Converter={StaticResource BoolToVisibilityConverter}}"/>
-                        <Button Content="DELETE"
+                                Visibility="{Binding HasEditChanges, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <Button Content="{DynamicResource Modal_Delete}"
                                 Width="110"
                                 Style="{StaticResource SailockButton_Danger}"
                                 Command="{Binding DeleteEntryCommand}"
                                 Margin="0,0,12,0"/>
-                        <Button Content="CANCEL"
+                        <Button Content="{DynamicResource Modal_Cancel}"
                                 Width="110"
                                 Style="{StaticResource SailockButton}"
                                 Command="{Binding CancelEditCommand}"/>
@@ -388,16 +403,16 @@
             </Border>
         </Grid>
 
-        <!-- ═══════════════════════ MODAL VERIFICAR MASTER PASSWORD ═══════════════════════ -->
+        <!-- ═══════════════════════ MODAL MASTER PASSWORD ═══════════════════════ -->
         <Grid Visibility="{Binding IsMasterPasswordModalOpen, Converter={StaticResource BoolToVisibilityConverter}}">
             <Rectangle Fill="#000000" Opacity="0.75"/>
             <Border Background="#111111" BorderBrush="#00ab26" BorderThickness="1"
                     Width="380" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="36,30">
                 <StackPanel>
-                    <TextBlock Text="VERIFICAR IDENTIDAD" Foreground="White"
-                               FontFamily="/Fonts/#Supermolot Light" FontSize="20"
-                               HorizontalAlignment="Center" Margin="0,0,0,8"/>
-                    <TextBlock Text="Introduce tu contraseña maestra para editar"
+                    <TextBlock Text="{DynamicResource Modal_MasterPass_Title}"
+                               Foreground="White" FontFamily="/Fonts/#Supermolot Light"
+                               FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                    <TextBlock Text="{DynamicResource Modal_MasterPass_Label}"
                                Foreground="#666666" FontFamily="/Fonts/#Supermolot Light"
                                FontSize="11" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
@@ -407,16 +422,18 @@
                                  KeyDown="MasterPasswordVerify_KeyDown"
                                  Margin="0,0,0,8"/>
 
-                    <TextBlock Text="Contraseña incorrecta" Foreground="#FF4D4D"
-                               FontFamily="/Fonts/#Supermolot Light" FontSize="11"
-                               HorizontalAlignment="Center" Margin="0,0,0,16"
-                               Visibility="{Binding MasterPasswordFailed,
-                                            Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <TextBlock Text="{DynamicResource Modal_MasterPass_Error}"
+                               Foreground="#FF4D4D" FontFamily="/Fonts/#Supermolot Light"
+                               FontSize="11" HorizontalAlignment="Center" Margin="0,0,0,16"
+                               Visibility="{Binding MasterPasswordFailed, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="CONFIRMAR" Width="130" Style="{StaticResource SailockButton}"
-                                Command="{Binding ConfirmMasterPasswordCommand}" Margin="0,0,16,0"/>
-                        <Button Content="CANCELAR"  Width="130" Style="{StaticResource SailockButton}"
+                        <Button Content="{DynamicResource Modal_Confirm}"
+                                Width="130" Style="{StaticResource SailockButton}"
+                                Command="{Binding ConfirmMasterPasswordCommand}"
+                                Margin="0,0,16,0"/>
+                        <Button Content="{DynamicResource Modal_Cancel}"
+                                Width="130" Style="{StaticResource SailockButton}"
                                 Command="{Binding CancelMasterPasswordCommand}"/>
                     </StackPanel>
                 </StackPanel>

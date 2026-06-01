@@ -1,55 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
-
-		<!-- Icono del ejecutable -->
 		<ApplicationIcon>Resources\sailock.ico</ApplicationIcon>
-
-		<!-- Versión -->
 		<AssemblyVersion>1.1.3.0</AssemblyVersion>
 		<FileVersion>1.1.3.0</FileVersion>
 		<Version>1.1.3</Version>
-
-		<!-- Nombre del ensamblado -->
 		<AssemblyName>Sailock</AssemblyName>
 		<RootNamespace>Sailock</RootNamespace>
 	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Fonts\Supermolot Light.ttf" />
-    <None Remove="Resources\sailock.ico" />
-    <None Remove="Resources\sailock_logo.png" />
-    <None Remove="Resources\sailock_logo_dark.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Fonts\Supermolot Light.ttf" />
+		<None Remove="Resources\sailock.ico" />
+		<None Remove="Resources\sailock_logo.png" />
+		<None Remove="Resources\sailock_logo_dark.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Resources\sailock.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\sailock_logo.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
+	<ItemGroup>
+		<Resource Include="Resources\sailock.ico">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\sailock_logo.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\sailock_logo_dark.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Fonts\Supermolot Light.ttf" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Fonts\Supermolot Light.ttf" />
-    <Resource Include="Resources\sailock_logo_dark.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Themes\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Themes\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Otp.NET" Version="1.4.1" />
-    <PackageReference Include="QRCoder" Version="1.8.0" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="Otp.NET" Version="1.4.1" />
+		<PackageReference Include="QRCoder" Version="1.8.0" />
+	</ItemGroup>
 </Project>

@@ -60,7 +60,12 @@ namespace Sailock.ViewModels
         public string SelectedLanguage
         {
             get => _selectedLanguage;
-            set { SetProperty(ref _selectedLanguage, value); PersistSettings(); }
+            set
+            {
+                SetProperty(ref _selectedLanguage, value);
+                LocalizationService.ApplyLanguage(value);
+                PersistSettings();
+            }
         }
 
         private string _selectedTextSize;
@@ -96,8 +101,10 @@ namespace Sailock.ViewModels
             set => SetProperty(ref _statusMessage, value);
         }
 
-        public Action OnDataImported { get; set; }
-        public Action<SetupTotpViewModel> OnOpen2FASetup { get; set; }
+        public Action? OnDataImported { get; set; }
+        public Action<SetupTotpViewModel>? OnOpen2FASetup { get; set; }
+        public Action<bool>? OnThemeChanged { get; set; }
+        public Action<bool>? OnAutoLockChanged { get; set; }
 
         public ICommand Enable2FACommand { get; }
         public ICommand ChangeMasterPassCommand { get; }
@@ -126,6 +133,7 @@ namespace Sailock.ViewModels
             ThemeService.ApplyTheme(_isDarkTheme);
             ThemeService.ApplyContrast(_isHighContrast);
             ThemeService.ApplyTextSize(_selectedTextSize);
+            LocalizationService.ApplyLanguage(_selectedLanguage);
 
             ConfirmDisable2FACommand = new RelayCommand(_ =>
             {
@@ -150,7 +158,7 @@ namespace Sailock.ViewModels
                     setupVM.OnSetupComplete = () =>
                     {
                         Is2FAEnabled = true;
-                        StatusMessage = "2FA activado correctamente.";
+                        StatusMessage = "2FA enabled successfully.";
                     };
                     setupVM.OnCancelled = () => { };
                     OnOpen2FASetup?.Invoke(setupVM);
@@ -182,14 +190,14 @@ namespace Sailock.ViewModels
 
             if (imported == null)
             {
-                StatusMessage = "Error: la contraseña no coincide con el archivo.";
+                StatusMessage = "Error: password does not match the file.";
                 return;
             }
 
             _appData.Entries.Clear();
             _appData.Entries.AddRange(imported.Entries);
             _storage.Save(_appData, _masterPassword);
-            StatusMessage = $"Importadas {imported.Entries.Count} entradas correctamente.";
+            StatusMessage = $"{imported.Entries.Count} entries imported successfully.";
             OnDataImported?.Invoke();
         }
 
@@ -205,7 +213,7 @@ namespace Sailock.ViewModels
             if (dialog.ShowDialog() != true) return;
 
             _storage.Export(_appData, dialog.FileName, _masterPassword);
-            StatusMessage = "Exportado correctamente.";
+            StatusMessage = "Exported successfully.";
         }
 
         private void DeleteAllData()
@@ -225,9 +233,5 @@ namespace Sailock.ViewModels
             _appData.Settings.TextSize = _selectedTextSize;
             _storage.Save(_appData, _masterPassword);
         }
-
-        public Action<bool> OnThemeChanged { get; set; }
-
-        public Action<bool> OnAutoLockChanged { get; set; }
     }
 }
