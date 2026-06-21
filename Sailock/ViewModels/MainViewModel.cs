@@ -1,4 +1,4 @@
-﻿using Sailock.Helpers;
+using Sailock.Helpers;
 using Sailock.Models;
 using Sailock.Services;
 using System.Windows;
@@ -109,6 +109,12 @@ namespace Sailock.ViewModels
 
             settingsVM.OnDataImported = () => _dashboardVM = null;
 
+            settingsVM.OnLanguageChanged = () =>
+            {
+                if (_dashboardVM != null)
+                    _dashboardVM.RefreshLanguage();
+            };
+
             settingsVM.OnOpen2FASetup = setupVM =>
             {
                 var previousSettings = CurrentView;
@@ -129,7 +135,6 @@ namespace Sailock.ViewModels
                     : "pack://application:,,,/Resources/sailock_logo_dark.png";
             };
 
-            // Firma actualizada: recibe bool + string del timeout
             settingsVM.OnAutoLockChanged = (enabled, timeoutOption) =>
             {
                 if (enabled)
